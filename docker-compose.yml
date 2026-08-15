@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # 1. Database Service
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db # This ensures your data isn't deleted when the container stops
+
+  # 2. Backend Service
+  server:
+    build: ./server
+    container_name: auth-server
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - mongodb # Wait for MongoDB to start before starting the server
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/auth-db # 'mongodb' here refers to the service name above
+
+  # 3. Frontend Service
+  client:
+    build: ./client
+    container_name: auth-client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    environment:
+      - VITE_API_URL=http://localhost:5000 # This is for the browser to find the API
+
+volumes:
+  mongo-data: # This creates a persistent volume for the database
