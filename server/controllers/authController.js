@@ -33,6 +33,7 @@ export const registerUser = async (req, res) => {
             message: "User registered successfully!",
             user: {
                 id: newUser._id,
+                _id: newUser._id,
                 username: newUser.username,
                 email: newUser.email
             }
@@ -84,6 +85,7 @@ export const loginUser = async (req, res) => {
             token,
             user: {
                 id: user._id,
+                _id: user._id,
                 username: user.username,
                 email: user.email
             }
@@ -94,5 +96,26 @@ export const loginUser = async (req, res) => {
     }
 
 }
+
+export const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.user).select("-password");
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.status(200).json({
+            user: {
+                id: user._id,
+                _id: user._id,
+                username: user.username,
+                email: user.email
+            }
+        });
+    } catch (error) {
+        console.error("GetMe Error:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
 
     

@@ -1,5 +1,5 @@
 import express from "express"
-import { registerUser, loginUser } from "../controllers/authController.js"
+import { registerUser, loginUser, getMe } from "../controllers/authController.js"
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -7,10 +7,6 @@ const router = express.Router();
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 
-router.get('/me', protect, (req, res) => {
-    res.status(200).json({
-        message: "Welcome to your protected profile!",
-        userId: req.user
-    })
-})
+router.get('/me', protect, getMe);
+
 export default router;
