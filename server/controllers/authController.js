@@ -11,11 +11,13 @@ export const registerUser = async (req, res) => {
             })
         }
 
-        const userExists = await User.findOne({ email });
+        const userExists = await User.findOne({
+            $or: [{ email }, { username }]
+        });
         if (userExists) {
             return res.status(400).json({
-                message: "The user is already exist"
-            })
+                message: userExists.email === email ? "The email is already registered" : "The username is already taken"
+            });
         }
 
         const salt = await bcrypt.genSalt(10)
@@ -42,6 +44,11 @@ export const registerUser = async (req, res) => {
 
     } catch (error) {
         console.error("Registration Error:", error);
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "User already exists with this email or username"
+            });
+        }
         res.status(500).json({
             message: "Server error occurred during registration"
         });

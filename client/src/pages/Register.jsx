@@ -12,7 +12,6 @@ const Register = () => {
         e.preventDefault();
         try {
             await API.post('/auth/register', formData);
-            alert(`Registeration successful, Please login`);
             navigate('/login')
         } catch (error) {
             setError(error.response?.data?.message || "Registration failed");
@@ -34,7 +33,7 @@ const Register = () => {
                             type="text"
                             id="reg-username"
                             required
-                            placeholder="johndoe"
+                            placeholder="Username"
                             name="username"
                             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                         />
@@ -46,7 +45,7 @@ const Register = () => {
                             type="email"
                             id="reg-email"
                             required
-                            placeholder="you@example.com"
+                            placeholder="Email"
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         />
                     </div>
@@ -57,7 +56,7 @@ const Register = () => {
                             type="password"
                             id="reg-password"
                             required
-                            placeholder="••••••••"
+                            placeholder="Password"
                             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                         />
                     </div>

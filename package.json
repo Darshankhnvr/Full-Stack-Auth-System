@@ -1,0 +1,23 @@
+{
+  "name": "full-stack-auth-system-roadmap",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000F\u0000u\u0000l\u0000l\u0000-\u0000S\u0000t\u0000a\u0000c\u0000k\u0000-\u0000A\u0000u\u0000t\u0000h\u0000-\u0000S\u0000y\u0000s\u0000t\u0000e\u0000m\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darshankhnvr/Full-Stack-Auth-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Darshankhnvr/Full-Stack-Auth-System/issues"
+  },
+  "homepage": "https://github.com/Darshankhnvr/Full-Stack-Auth-System#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0"
+  }
+}
